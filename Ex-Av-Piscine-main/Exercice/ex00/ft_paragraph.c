@@ -6,7 +6,7 @@
 /*   By: kakhemkh <kakhemkh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 11:51:46 by qzimmerm          #+#    #+#             */
-/*   Updated: 2026/10/27 10:45:55 by kakhemkh         ###   ########.fr       */
+/*   Updated: 2026/10/27 15:00:11 by kakhemkh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_make_paragraph(char *input, t_config *config)
 			config->e = 0;
 		}
 	}
+		write(1,"\n", 1);
 	if (input[config->f] != '\0')
 	{
 		write(1, "Rest: ", 6);
@@ -40,14 +41,15 @@ void	ft_make_paragraph(char *input, t_config *config)
 	}
 }
 
-int	put_error(char *input)
+int	put_error(t_config *config)
 {
-	while (*input != '\0')
-	{
-		write(2, input, 1);
-		input++;
-	}
-	return (1);
+	if (config->d < config->p_nbr)
+		write(1,"Not enough paragraphs.\n",23);
+	if (config->e % config->p_len || config->p_len == 0)
+		write(1,"Missing line in paragraph.\n", 27);
+	if (config->f % config->l_len || config->l_len <= 2)
+		write(1,"Missing char in line.\n",22);
+	return(0);
 }
 
 int	main(int ac, char **av)
@@ -61,7 +63,8 @@ int	main(int ac, char **av)
 	config.p_len = 2;
 	config.p_nbr = 3;
 	if (ac != 2)
-		return (put_error("Error: usage ./a.out <text>.\n"));
+		write(1,"Error: usage ./a.out <text>.\n", 29);
 	ft_make_paragraph(av[1], &config);
+	put_error(&config);
 	return (1);
 }
