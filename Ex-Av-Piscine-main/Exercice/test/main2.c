@@ -7,6 +7,7 @@ typedef struct s_people {
 
 
 int total = 0;
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -33,16 +34,16 @@ int main (int argc, char **argv){
 
 	t_people *head = &node;
 	while (head != NULL){
+		write(1,"Name:",5);
 		puts(head->name);
+		write(1,"Age:", 4);
 		printf("%d\n", head->age);
-		if (head->next != NULL)
-			head = head->next;
+		head = head->next;
 		}
 		
-		printf("AAAA\n");
 		int count = 0;
 		head = &node;
-		while (head->next != NULL){
+		while (head != NULL){
 			count++;
 			head = head->next;
 		}
