@@ -1,0 +1,20 @@
+// ./a.out "Name" "age" "name" "age" "stop"
+	// ex : ./a.out "alice" 18 "bertrand" 16 "gael" 89 "stop"  
+
+
+
+
+
+
+	
+
+	/*
+		------------------ PEOPLES ------------------
+		Name: <nom>
+		Age: <age> 
+
+		^^ pour chaque personne
+
+
+		Total : %d peoples
+	*/

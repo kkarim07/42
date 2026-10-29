@@ -1,13 +1,56 @@
 typedef struct s_people {
 	char *name;
 	int age;
+	struct s_people *next;
+	struct s_people *previous;
 } t_people;
 
 
 int total = 0;
+#include <stdlib.h>
+#include <stdio.h>
 
 int main (int argc, char **argv){
-	// ./a.out "Name" "age" "name" "age" "stop"
+	t_people node;
+	node.name = argv[1];
+	node.age = atoi(argv[2]);
+	node.previous = NULL;
+
+	t_people node2;
+	node2.name = argv[3];
+	node2.age = atoi(argv[4]);
+	node.next = &node2;
+	node.previous = &node;
+	node.next = &node2;
+	
+	t_people node3;
+	node3.name = argv[5];
+	node3.age = atoi(argv[6]);
+	node3.next = NULL;
+	node3.previous = &node2;
+	node2.previous = &node;
+	node2.next = &node3;
+
+	t_people *head = &node;
+	while (head != NULL){
+		puts(head->name);
+		printf("%d\n", head->age);
+		if (head->next != NULL)
+			head = head->next;
+		}
+		
+		printf("AAAA\n");
+		int count = 0;
+		head = &node;
+		while (head->next != NULL){
+			count++;
+			head = head->next;
+		}
+		printf("%d\n",count);
+		return(0);
+		
+}
+// ./a.out "Name" "age" "name" "age" "stop"
 	// ex : ./a.out "alice" 18 "bertrand" 16 "gael" 89 "stop"  
 
 
@@ -27,5 +70,3 @@ int main (int argc, char **argv){
 
 		Total : %d peoples
 	*/
-
-}
